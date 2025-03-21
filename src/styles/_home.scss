@@ -1,0 +1,88 @@
+@use "./abstracts" as *;
+
+.main {
+	flex-grow: 1;
+	background-color: $color-gray-200;
+	padding: 0 10px;
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.categories {
+	list-style: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	&__item {
+		padding: 0 36.5px 6px;
+		border-bottom: solid 2px $color-black-12;
+
+		&:has(.categories__tab--active) {
+			border-bottom: solid 2px $color-blue-400;
+		}
+	}
+
+	&__tab {
+		transition: all 0.2s;
+
+		&:link,
+		&:visited {
+			@include typography-button;
+			text-decoration: none;
+			text-transform: uppercase;
+			color: $color-gray-900-60;
+		}
+
+		&:hover,
+		&:active {
+			color: $color-gray-900-87;
+		}
+
+		&--active {
+			&:link,
+			&:hover,
+			&:visited,
+			&:active {
+				color: $color-blue-400;
+			}
+		}
+	}
+}
+
+.completed {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+
+	&__text {
+		@include typography-body;
+	}
+}
+
+.empty-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	.notes:has(&) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		margin-top: 80px;
+	}
+
+	& img {
+		margin-bottom: 20px;
+	}
+
+	& figcaption {
+		@include typography-header-xs;
+	}
+}
