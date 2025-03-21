@@ -1,0 +1,14 @@
+@use "./abstracts" as *;
+
+.header {
+	box-shadow: 0 4px 20px 0 $color-black-15;
+	padding: 0 10px;
+}
+
+.header > .container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	padding: 17px 0;
+}
