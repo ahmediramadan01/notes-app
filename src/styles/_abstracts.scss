@@ -1,0 +1,64 @@
+$color-black: #000;
+$color-black-32: rgba(0, 0, 0, 0.32);
+$color-black-24: rgba(0, 0, 0, 0.24);
+$color-black-12: rgba(0, 0, 0, 0.12);
+
+$color-white: #fff;
+$color-white-24: rgba(255, 255, 255, 0.24);
+
+$color-gray-900: #212121;
+$color-gray-900-87: rgba(33, 33, 33, 0.87);
+$color-gray-900-60: rgba(33, 33, 33, 0.6);
+$color-gray-900-36: rgba(33, 33, 33, 0.36);
+$color-gray-600: #757575;
+$color-gray-200: #eee;
+
+$color-blue-400: #42a5f5;
+$color-blue-500: #2196f3;
+
+$color-orange-900: #e65100;
+$color-orange-200: #ffcc80;
+
+$color-green-900: #1b5e20;
+$color-green-200: #a5d6a7;
+
+$color-deep-purple-900: #4527a0;
+$color-deep-purple-200: #b39ddb;
+
+$color-red-400: #ef5350;
+$color-red-500: #f44336;
+
+@mixin typography-header-s {
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 1.4;
+	letter-spacing: 0.25px;
+}
+
+@mixin typography-header-xs {
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 1.68;
+	letter-spacing: 0.25px;
+}
+
+@mixin typography-button {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.5;
+	letter-spacing: 1.25px;
+}
+
+@mixin typography-body {
+	font-size: 16px;
+	font-weight: normal;
+	line-height: 1.5;
+	letter-spacing: 0.5px;
+}
+
+@mixin typography-caption {
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 2;
+	letter-spacing: 0.4px;
+}
