@@ -47,4 +47,22 @@
 			height: 18px;
 		}
 	}
+
+	&--close {
+		padding: 8px;
+
+		& img {
+			width: 24px;
+			height: 24px;
+		}
+	}
+
+	&--cancel {
+		@include typography-button;
+		color: $color-gray-600;
+
+		&:hover {
+			color: $color-gray-900-87;
+		}
+	}
 }

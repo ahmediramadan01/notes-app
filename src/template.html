@@ -27,7 +27,62 @@
 				</button>
 			</div>
 		</header>
-		<main class="home">
+		<dialog class="dialog">
+			<form method="dialog" class="dialog__form">
+				<header class="dialog__header">
+					<h2 class="dialog__heading">Add note</h2>
+					<button
+						value="cancel"
+						formmethod="dialog"
+						class="button button--icon button--close">
+						<img src="./assets/icons/close-icon.svg" alt="Close icon" />
+					</button>
+				</header>
+				<div class="dialog__required">
+					<fieldset class="dialog__fieldset">
+						<label for="title" class="dialog__label">Title</label>
+						<input
+							type="text"
+							id="title"
+							class="form-field"
+							placeholder="Add title"
+							autofocus
+							required />
+					</fieldset>
+					<fieldset class="dialog__fieldset">
+						<label for="category" class="dialog__label">Category</label>
+						<select id="category" class="form-field" required>
+							<option value="personal">Personal</option>
+							<option value="home">Home</option>
+							<option value="business">Business</option>
+						</select>
+					</fieldset>
+				</div>
+				<fieldset class="dialog__fieldset">
+					<div class="dialog__description-text">
+						<label for="description" class="dialog__label"
+							>Description <span>(optional)</span></label
+						>
+						<p class="dialog__description-count">0/200</p>
+					</div>
+					<textarea
+						id="description"
+						class="form-field dialog__fieldset"
+						maxlength="200"
+						placeholder="Add description"></textarea>
+				</fieldset>
+				<div class="dialog__buttons">
+					<button
+						value="cancel"
+						formmethod="dialog"
+						class="button button--cancel">
+						Cancel
+					</button>
+					<button value="default" class="button button--add">Add</button>
+				</div>
+			</form>
+		</dialog>
+		<main class="main">
 			<div class="container">
 				<h1 class="main-heading">Your notes</h1>
 				<nav class="nav">
@@ -36,22 +91,22 @@
 							<a
 								href="#all"
 								class="categories__tab categories__tab--active"
-								role="tab"
-								>All</a
-							>
+								role="tab">
+								All
+							</a>
 						</li>
 						<li class="categories__item">
-							<a href="#personal" class="categories__tab" role="tab"
-								>Personal</a
-							>
+							<a href="#personal" class="categories__tab" role="tab">
+								Personal
+							</a>
 						</li>
 						<li class="categories__item">
 							<a href="#home" class="categories__tab" role="tab">Home</a>
 						</li>
 						<li class="categories__item">
-							<a href="#business" class="categories__tab" role="tab"
-								>Business</a
-							>
+							<a href="#business" class="categories__tab" role="tab">
+								Business
+							</a>
 						</li>
 					</ul>
 					<div class="completed">
