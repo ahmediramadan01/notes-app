@@ -18,7 +18,7 @@
 						placeholder="Search"
 						class="form-field--search__input" />
 				</div>
-				<button class="button button--add">
+				<button class="button button--open">
 					<img
 						src="./assets/icons/add-icon.svg"
 						alt="Add icon"
@@ -32,6 +32,7 @@
 				<header class="dialog__header">
 					<h2 class="dialog__heading">Add note</h2>
 					<button
+						type="button"
 						value="cancel"
 						formmethod="dialog"
 						class="button button--icon button--close">
@@ -46,12 +47,13 @@
 							id="title"
 							class="form-field"
 							placeholder="Add title"
+							name="title"
 							autofocus
 							required />
 					</fieldset>
 					<fieldset class="dialog__fieldset">
 						<label for="category" class="dialog__label">Category</label>
-						<select id="category" class="form-field" required>
+						<select id="category" class="form-field" name="category" required>
 							<option value="personal">Personal</option>
 							<option value="home">Home</option>
 							<option value="business">Business</option>
@@ -68,11 +70,13 @@
 					<textarea
 						id="description"
 						class="form-field dialog__fieldset"
+						name="description"
 						maxlength="200"
 						placeholder="Add description"></textarea>
 				</fieldset>
 				<div class="dialog__buttons">
 					<button
+						type="button"
 						value="cancel"
 						formmethod="dialog"
 						class="button button--cancel">
