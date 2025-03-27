@@ -2,6 +2,8 @@ class AddNoteView {
 	_dialogElement = document.querySelector(".dialog");
 	_buttonOpenElement = document.querySelector(".button--open");
 	_formElement = document.querySelector(".dialog__form");
+	_descriptionCountElement = document.querySelector(".description-count");
+	_descriptionFieldElement = document.querySelector("#description");
 	_buttonCloseElement = document.querySelector(".button--close");
 	_buttonCancelElement = document.querySelector(".button--cancel");
 
@@ -9,6 +11,7 @@ class AddNoteView {
 		this._addHandlerOpenDialog();
 		this._addHandlerCloseDialog();
 		this._addHandlerResetForm();
+		this._addHandlerDescriptionCount();
 	}
 
 	_resetForm() {
@@ -47,6 +50,12 @@ class AddNoteView {
 			if (event.key === "Escape") {
 				this._resetForm();
 			}
+		});
+	}
+
+	_addHandlerDescriptionCount() {
+		this._descriptionFieldElement.addEventListener("input", (event) => {
+			this._descriptionCountElement.textContent = event.target.value.length;
 		});
 	}
 
