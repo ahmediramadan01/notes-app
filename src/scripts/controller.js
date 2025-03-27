@@ -9,7 +9,12 @@ const controlAddNote = function (note) {
 	notesView.render(model.state.notes);
 };
 
+const controlNotes = function () {
+	notesView.render(model.state.notes);
+};
+
 const init = function () {
 	addNoteView.addHandlerAddNote(controlAddNote);
+	notesView.addHandlerRender(controlNotes);
 };
 init();
