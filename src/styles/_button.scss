@@ -30,6 +30,7 @@
 	}
 
 	&--icon {
+		padding: 8px;
 		border-radius: 50%;
 		display: flex;
 		align-items: center;
@@ -37,15 +38,6 @@
 
 		&:hover {
 			background-color: $color-black-12;
-		}
-	}
-
-	&--checkbox {
-		padding: 11px;
-
-		& img {
-			width: 18px;
-			height: 18px;
 		}
 	}
 
@@ -64,6 +56,27 @@
 
 		&:hover {
 			color: $color-gray-900-87;
+		}
+	}
+
+	&--checkbox {
+		& img {
+			width: 18px;
+			height: 18px;
+		}
+	}
+
+	&--edit {
+		& img {
+			width: 18px;
+			height: 18px;
+		}
+	}
+
+	&--delete {
+		& img {
+			width: 18px;
+			height: 18px;
 		}
 	}
 }

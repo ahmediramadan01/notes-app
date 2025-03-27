@@ -29,7 +29,7 @@
 		</header>
 		<dialog class="dialog">
 			<form method="dialog" class="dialog__form">
-				<header class="dialog__header">
+				<div class="dialog__header">
 					<h2 class="dialog__heading">Add note</h2>
 					<button
 						type="button"
@@ -38,8 +38,8 @@
 						class="button button--icon button--close">
 						<img src="./assets/icons/close-icon.svg" alt="Close icon" />
 					</button>
-				</header>
-				<div class="dialog__required">
+				</div>
+				<div class="dialog__input">
 					<fieldset class="dialog__fieldset">
 						<label for="title" class="dialog__label">Title</label>
 						<input
@@ -123,7 +123,7 @@
 					</div>
 				</nav>
 				<section class="notes">
-					<figure class="empty-container">
+					<figure class="no-notes">
 						<img
 							src="./assets/icons/no-notes-illustration.svg"
 							alt="No notes illustration" />

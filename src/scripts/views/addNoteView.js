@@ -54,11 +54,18 @@ class AddNoteView {
 		this._formElement.addEventListener("submit", function (event) {
 			event.preventDefault();
 
-			const dataArray = [...new FormData(this)];
-			const data = Object.fromEntries(dataArray);
-			console.log(`🚀 ~ data ->`, data);
+			const now = new Date();
+			const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 
-			handler(data);
+			const noteArray = [...new FormData(this)];
+			const noteObject = Object.fromEntries(noteArray);
+			const note = {
+				...noteObject,
+				creationDate: formattedDate,
+				completed: false,
+			};
+
+			handler(note);
 		});
 	}
 }
