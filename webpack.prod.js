@@ -10,40 +10,43 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const PATHS = {
-  src: join(__dirname, "src"),
+	src: join(__dirname, "src"),
 };
 
 export default merge(common, {
-  mode: "production",
-  devtool: "source-map",
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
-      },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader",
-          "sass-loader",
-        ],
-      },
-      {
-        test: /\.(?:js|mjs|cjs)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
-      },
-    ],
-  },
-  plugins: [
-    new MiniCssExtractPlugin({ filename: "index.[contenthash].css" }),
-    new PurgeCSSPlugin({
-      paths: sync(`${PATHS.src}/**/*`, { nodir: true }),
-    }),
-  ],
+	mode: "production",
+	devtool: "source-map",
+	module: {
+		rules: [
+			{
+				test: /\.css$/i,
+				use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+			},
+			{
+				test: /\.s[ac]ss$/i,
+				use: [
+					MiniCssExtractPlugin.loader,
+					"css-loader",
+					"postcss-loader",
+					"sass-loader",
+				],
+			},
+			{
+				test: /\.(?:js|mjs|cjs)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: "babel-loader",
+				},
+			},
+		],
+	},
+	plugins: [
+		new MiniCssExtractPlugin({ filename: "index.[contenthash].css" }),
+		new PurgeCSSPlugin({
+			paths: sync(`${PATHS.src}/**/*`, { nodir: true }),
+			safelist: {
+				standard: [/^note__category--/],
+			},
+		}),
+	],
 });
