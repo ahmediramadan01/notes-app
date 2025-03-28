@@ -20,7 +20,7 @@ const controlNotes = function () {
 
 	if (!hash || hash === "all") notesView.render(model.state.notes);
 	else {
-		const filteredNotes = model.filterNotesByCategory(hash);
+		const filteredNotes = model.filterNotesByCategory(model.state.notes, hash);
 		notesView.render(filteredNotes);
 	}
 };
@@ -32,10 +32,19 @@ const controlToggleCompleted = function (id) {
 };
 
 const controlSearch = function (input) {
-	const searchedNotes = model.searchNotes(input);
+	const searchedNotes = model.searchNotes(model.state.notes, input);
 
-	if (input !== "") notesView.render(searchedNotes, true);
-	else notesView.render(model.state.notes);
+	if (input !== "") {
+		const hash = getHash();
+		if (!hash || hash === "all") notesView.render(searchedNotes, true);
+		else {
+			const filteredSearchNotes = model.filterNotesByCategory(
+				searchedNotes,
+				hash,
+			);
+			notesView.render(filteredSearchNotes);
+		}
+	} else notesView.render(model.state.notes);
 };
 
 const init = function () {

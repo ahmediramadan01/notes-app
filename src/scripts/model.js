@@ -19,14 +19,14 @@ export const toggleCompletion = function (id) {
 	persistNotes();
 };
 
-export const searchNotes = function (input) {
-	return state.notes.filter((note) =>
+export const searchNotes = function (notes, input) {
+	return notes.filter((note) =>
 		note.title.toLowerCase().includes(input.toLowerCase()),
 	);
 };
 
-export const filterNotesByCategory = function (hash) {
-	return state.notes.filter((note) => hash === note.category);
+export const filterNotesByCategory = function (notes, hash) {
+	return notes.filter((note) => hash === note.category);
 };
 
 const init = function () {
