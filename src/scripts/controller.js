@@ -16,9 +16,7 @@ const controlNotes = function () {
 
 	if (!id || id === "all") notesView.render(model.state.notes);
 	else {
-		const filteredNotes = model.state.notes.filter(
-			(note) => id === note.category,
-		);
+		const filteredNotes = model.filterNotesByCategory(id);
 		notesView.render(filteredNotes);
 	}
 };
@@ -30,9 +28,7 @@ const controlToggleCompleted = function (noteId) {
 };
 
 const controlSearch = function (input) {
-	const searchedNotes = model.state.notes.filter((note) =>
-		note.title.toLowerCase().includes(input.toLowerCase()),
-	);
+	const searchedNotes = model.searchNotes(input);
 
 	if (input !== "") notesView.render(searchedNotes, true);
 	else notesView.render(model.state.notes);

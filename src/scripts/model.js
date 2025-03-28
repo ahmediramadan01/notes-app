@@ -19,6 +19,16 @@ export const toggleCompletion = function (noteId) {
 	persistNotes();
 };
 
+export const searchNotes = function (input) {
+	return state.notes.filter((note) =>
+		note.title.toLowerCase().includes(input.toLowerCase()),
+	);
+};
+
+export const filterNotesByCategory = function (id) {
+	return state.notes.filter((note) => id === note.category);
+};
+
 const init = function () {
 	if (localStorage.getItem("notes"))
 		state.notes = JSON.parse(localStorage.getItem("notes"));
