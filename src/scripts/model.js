@@ -8,6 +8,14 @@ const persistNotes = function () {
 
 export const addNote = function (note) {
 	state.notes.push(note);
+
+	persistNotes();
+};
+
+export const toggleCompletion = function (noteId) {
+	const noteIndex = state.notes.findIndex((note) => note.id === +noteId);
+	state.notes[noteIndex].completed = !state.notes[noteIndex].completed;
+
 	persistNotes();
 };
 

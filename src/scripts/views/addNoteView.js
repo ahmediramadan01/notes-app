@@ -70,6 +70,7 @@ class AddNoteView {
 			const noteObject = Object.fromEntries(noteArray);
 			const note = {
 				...noteObject,
+				id: Date.now(),
 				creationDate: formattedDate,
 				completed: false,
 			};

@@ -1,4 +1,5 @@
 import checkboxIcon from "../../assets/icons/checkbox-icon.svg";
+import checkboxCheckedIcon from "../../assets/icons/checkbox-checked-icon.svg";
 import editIcon from "../../assets/icons/edit-icon.svg";
 import deleteIcon from "../../assets/icons/delete-icon.svg";
 import noNotesIllustration from "../../assets/icons/no-notes-illustration.svg";
@@ -17,7 +18,7 @@ class NotesView {
 		return this._data
 			.map((note) => {
 				return `
-        <article class="note">
+        <article class="note ${note.completed ? "note--completed" : ""}" data-id="${note.id}">
           <div class="note__header">
             <div class="note__category note__category--${note.category}">
               ${note.category.slice(0, 1).toUpperCase()}${note.category.slice(1)}
@@ -28,7 +29,7 @@ class NotesView {
                   class="button button--icon button--checkbox"
                   role="checkbox">
                   <img
-                    src="${checkboxIcon}"
+                    src="${note.completed ? checkboxCheckedIcon : checkboxIcon}"
                     alt="Checkbox icon" />
                 </button>
               </li>

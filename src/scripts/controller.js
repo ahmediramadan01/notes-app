@@ -2,6 +2,7 @@ import "../styles/main.scss";
 import * as model from "./model.js";
 import addNoteView from "./views/addNoteView.js";
 import notesView from "./views/notesView.js";
+import noteView from "./views/noteView.js";
 import searchView from "./views/searchView.js";
 
 const controlAddNote = function (note) {
@@ -22,6 +23,12 @@ const controlNotes = function () {
 	}
 };
 
+const controlToggleCompleted = function (noteId) {
+	model.toggleCompletion(noteId);
+
+	controlNotes();
+};
+
 const controlSearch = function (input) {
 	const searchedNotes = model.state.notes.filter((note) =>
 		note.title.toLowerCase().includes(input.toLowerCase()),
@@ -34,6 +41,7 @@ const controlSearch = function (input) {
 const init = function () {
 	addNoteView.addHandlerAddNote(controlAddNote);
 	notesView.addHandlerRender(controlNotes);
+	noteView.addHandlerToggleCompleted(controlToggleCompleted);
 	searchView.addHandlerSearch(controlSearch);
 };
 init();

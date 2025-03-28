@@ -1,8 +1,6 @@
 @use "./abstracts" as *;
 
 .note {
-	// width: 403px;
-	// height: 248px;
 	display: flex;
 	flex-direction: column;
 	padding: 20px;
@@ -60,5 +58,29 @@
 	&__date {
 		@include typography-caption;
 		align-self: flex-end;
+	}
+
+	&--completed {
+		color: $color-gray-900-36;
+		background-color: $color-white-24;
+
+		& .note__category {
+			&--personal,
+			&--home,
+			&--business {
+				color: inherit;
+				background-color: $color-gray-900-36;
+			}
+		}
+
+		& .note__title,
+		& .note__description {
+			text-decoration: line-through;
+		}
+
+		& .button img {
+			filter: invert(46%) sepia(0%) saturate(0%) hue-rotate(218deg)
+				brightness(99%) contrast(86%);
+		}
 	}
 }
