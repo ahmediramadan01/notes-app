@@ -11,7 +11,15 @@ const controlAddNote = function (note) {
 };
 
 const controlNotes = function () {
-	notesView.render(model.state.notes);
+	const id = window.location.hash.slice(1);
+
+	if (!id || id === "all") notesView.render(model.state.notes);
+	else {
+		const filteredNotes = model.state.notes.filter(
+			(note) => id === note.category,
+		);
+		notesView.render(filteredNotes);
+	}
 };
 
 const controlSearch = function (input) {

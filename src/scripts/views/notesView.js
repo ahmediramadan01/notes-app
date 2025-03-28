@@ -7,6 +7,7 @@ import noSearchResultsIllustration from "../../assets/icons/no-search-results-il
 class NotesView {
 	_data;
 	_notesContainerElement = document.querySelector(".notes");
+	_categoriesTabsElements = document.querySelectorAll(".categories__tab");
 
 	_clearNotesContainer() {
 		this._notesContainerElement.innerHTML = "";
@@ -106,7 +107,20 @@ class NotesView {
 	}
 
 	addHandlerRender(handler) {
-		window.addEventListener("load", handler);
+		["load", "hashchange"].forEach((e) =>
+			window.addEventListener(e, () => {
+				this._categoriesTabsElements.forEach((element) =>
+					element.classList.remove("categories__tab--active"),
+				);
+
+				const id = window.location.hash.slice(1);
+				document
+					.querySelector(`a[href='#${!id ? "all" : id}']`)
+					.classList.add("categories__tab--active");
+
+				handler();
+			}),
+		);
 	}
 }
 
