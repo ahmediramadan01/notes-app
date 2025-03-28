@@ -11,18 +11,22 @@ const controlAddNote = function (note) {
 	notesView.render(model.state.notes);
 };
 
-const controlNotes = function () {
-	const id = window.location.hash.slice(1);
+const getHash = function () {
+	return window.location.hash.slice(1);
+};
 
-	if (!id || id === "all") notesView.render(model.state.notes);
+const controlNotes = function () {
+	const hash = getHash();
+
+	if (!hash || hash === "all") notesView.render(model.state.notes);
 	else {
-		const filteredNotes = model.filterNotesByCategory(id);
+		const filteredNotes = model.filterNotesByCategory(hash);
 		notesView.render(filteredNotes);
 	}
 };
 
-const controlToggleCompleted = function (noteId) {
-	model.toggleCompletion(noteId);
+const controlToggleCompleted = function (id) {
+	model.toggleCompletion(id);
 
 	controlNotes();
 };

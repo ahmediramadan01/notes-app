@@ -1,6 +1,3 @@
-// import checkboxIcon from "../../assets/icons/checkbox-icon.svg";
-// import checkboxCheckedIcon from "../../assets/icons/checkbox-checked-icon.svg";
-
 class NoteView {
 	_notesContainerElement = document.querySelector(".notes");
 

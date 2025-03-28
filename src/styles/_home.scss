@@ -6,17 +6,10 @@
 	padding: 0 10px;
 }
 
-.nav {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
 .categories {
 	list-style: none;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 
 	&__item {
 		padding: 0 36.5px 6px;
@@ -51,16 +44,6 @@
 				color: $color-blue-400;
 			}
 		}
-	}
-}
-
-.completed {
-	display: flex;
-	align-items: center;
-	gap: 20px;
-
-	&__text {
-		@include typography-body;
 	}
 }
 

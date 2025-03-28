@@ -12,8 +12,8 @@ export const addNote = function (note) {
 	persistNotes();
 };
 
-export const toggleCompletion = function (noteId) {
-	const noteIndex = state.notes.findIndex((note) => note.id === +noteId);
+export const toggleCompletion = function (id) {
+	const noteIndex = state.notes.findIndex((note) => note.id === +id);
 	state.notes[noteIndex].completed = !state.notes[noteIndex].completed;
 
 	persistNotes();
@@ -25,8 +25,8 @@ export const searchNotes = function (input) {
 	);
 };
 
-export const filterNotesByCategory = function (id) {
-	return state.notes.filter((note) => id === note.category);
+export const filterNotesByCategory = function (hash) {
+	return state.notes.filter((note) => hash === note.category);
 };
 
 const init = function () {
