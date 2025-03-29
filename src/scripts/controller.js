@@ -55,9 +55,15 @@ const controlSearch = function (input) {
 	} else notesView.render(model.state.notes);
 };
 
+const controlDeleteNote = function (id) {
+	model.deleteNote(id);
+	notesView.render(model.state.notes);
+};
+
 const init = function () {
 	noteView.addHandlerNote(controlNote);
 	noteView.addHandlerToggleCompleted(controlToggleCompleted);
+	noteView.addHandlerDeleteNote(controlDeleteNote);
 	notesView.addHandlerRender(controlNotes);
 	searchView.addHandlerSearch(controlSearch);
 };

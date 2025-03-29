@@ -1,8 +1,8 @@
 class NoteView {
 	_notesContainerElement = document.querySelector(".notes");
-	_dialogElement = document.querySelector(".dialog");
+	_dialogAddElement = document.querySelector(".dialog--add");
 	_buttonOpenElement = document.querySelector(".button--open");
-	_formElement = document.querySelector(".dialog__form");
+	_formElement = document.querySelector(".dialog--add__form");
 	_idElement = document.querySelector("#id");
 	_titleElement = document.querySelector("#title");
 	_categoryElement = document.querySelector("#category");
@@ -12,41 +12,42 @@ class NoteView {
 	_buttonCancelElement = document.querySelector(".button--cancel");
 
 	constructor() {
-		this._addHandlerOpenDialog();
-		this._addHandlerCloseDialog();
+		this._addHandlerOpenFormDialog();
+		this._addHandlerCloseFormDialog();
 		this._addHandlerResetForm();
 		this._addHandlerDescriptionCount();
 		this._addHandlerEditNote();
+		this._addHandlerOpenDeleteDialog();
 	}
 
 	_resetForm() {
 		this._formElement.reset();
 	}
 
-	openDialog() {
-		this._dialogElement.showModal();
+	openFormDialog() {
+		this._dialogAddElement.showModal();
 	}
 
-	closeDialog() {
-		this._dialogElement.close();
+	closeFormDialog() {
+		this._dialogAddElement.close();
 		this._resetForm();
 	}
 
-	_addHandlerOpenDialog() {
+	_addHandlerOpenFormDialog() {
 		this._buttonOpenElement.addEventListener(
 			"click",
-			this.openDialog.bind(this),
+			this.openFormDialog.bind(this),
 		);
 	}
 
-	_addHandlerCloseDialog() {
+	_addHandlerCloseFormDialog() {
 		this._buttonCloseElement.addEventListener(
 			"click",
-			this.closeDialog.bind(this),
+			this.closeFormDialog.bind(this),
 		);
 		this._buttonCancelElement.addEventListener(
 			"click",
-			this.closeDialog.bind(this),
+			this.closeFormDialog.bind(this),
 		);
 	}
 
@@ -92,7 +93,7 @@ class NoteView {
 				handler(note, false);
 			}
 
-			this.closeDialog();
+			this.closeFormDialog();
 		});
 	}
 
@@ -112,7 +113,7 @@ class NoteView {
 
 			const noteElement = event.target.closest(".note");
 
-			this._dialogElement.showModal();
+			this._dialogAddElement.showModal();
 
 			this._idElement.value = noteElement.dataset.id;
 
@@ -131,6 +132,30 @@ class NoteView {
 
 			this._descriptionCountElement.textContent =
 				this._descriptionElement.value.length;
+		});
+	}
+
+	_addHandlerOpenDeleteDialog() {
+		this._notesContainerElement.addEventListener("click", (event) => {
+			if (!event.target.closest(".button--delete")) return;
+
+			document.querySelector(".dialog--delete").showModal();
+
+			document.querySelector("#deleteId").value =
+				event.target.closest(".note").dataset.id;
+		});
+	}
+
+	addHandlerDeleteNote(handler) {
+		this._notesContainerElement.addEventListener("click", (event) => {
+			if (event.target.closest(".button--confirm"))
+				handler(document.querySelector("#deleteId").value);
+			else if (
+				event.target.closest(".button--close") ||
+				event.target.closest(".button--cancel")
+			)
+				document.querySelector(".dialog--delete").close();
+			else return;
 		});
 	}
 }

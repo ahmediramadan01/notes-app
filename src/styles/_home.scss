@@ -51,7 +51,6 @@
 	&:has(.note) {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, 400px);
-		grid-template-rows: repeat(auto-fill, 250px);
 		justify-content: center;
 		gap: 24px;
 		margin-top: 32px;

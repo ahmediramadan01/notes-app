@@ -4,6 +4,7 @@ import editIcon from "../../assets/icons/edit-icon.svg";
 import deleteIcon from "../../assets/icons/delete-icon.svg";
 import noNotesIllustration from "../../assets/icons/no-notes-illustration.svg";
 import noSearchResultsIllustration from "../../assets/icons/no-search-results-illustration.svg";
+import closeIcon from "../../assets/icons/close-icon.svg";
 
 class NotesView {
 	_data;
@@ -15,7 +16,27 @@ class NotesView {
 	}
 
 	_generateNotesMarkup() {
-		return this._data
+		return `
+    <dialog class="dialog dialog--delete" >
+      <input style="display: none" type="text" id="deleteId" name="deleteId" />
+      <div class="dialog__header">
+        <h2 class="dialog--delete__heading">Delete note</h2>
+        <button
+          class="button button--icon button--close">
+          <img src="${closeIcon}" alt="Close icon" />
+        </button>
+      </div>
+      <p class="dialog--delete__message">
+        Are you sure you want to delete this note?
+      </p>
+      <div class="dialog__buttons">
+        <button class="button button--cancel">
+          Cancel
+        </button>
+        <button class="button button--confirm">Delete</button>
+      </div>
+    </dialog>
+    ${this._data
 			.map((note) => {
 				return `
         <article class="note ${note.completed ? "note--completed" : ""}" data-id="${note.id}">
@@ -55,7 +76,7 @@ class NotesView {
         </article>
         `;
 			})
-			.join("");
+			.join("")}`;
 	}
 
 	_renderNoNotes() {

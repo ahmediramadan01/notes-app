@@ -21,7 +21,7 @@ export const editNote = function (note) {
 };
 
 export const toggleCompletion = function (id) {
-	const noteIndex = state.notes.findIndex((note) => note.id === +id);
+	const noteIndex = state.notes.findIndex((note) => note.id === id);
 	state.notes[noteIndex].completed = !state.notes[noteIndex].completed;
 
 	persistNotes();
@@ -35,6 +35,14 @@ export const searchNotes = function (notes, input) {
 
 export const filterNotesByCategory = function (notes, hash) {
 	return notes.filter((note) => hash === note.category);
+};
+
+export const deleteNote = function (id) {
+	const noteIndex = state.notes.findIndex((note) => note.id === id);
+	console.log(noteIndex);
+	state.notes.splice(noteIndex, 1);
+
+	persistNotes();
 };
 
 const init = function () {

@@ -5,9 +5,11 @@
 	background: none;
 	border: none;
 	transition: all 0.2s;
+	color: $color-white;
 
 	&--open,
-	&--add {
+	&--add,
+	&--confirm {
 		@include typography-button;
 		display: flex;
 		justify-content: center;
@@ -15,7 +17,11 @@
 		gap: 8px;
 		padding: 12px 16px;
 		border-radius: 56px;
-		color: $color-white;
+		background-color: $color-blue-400;
+	}
+
+	&--open,
+	&--add {
 		background-color: $color-blue-400;
 
 		&:hover {
@@ -26,6 +32,14 @@
 			width: 18px;
 			height: 18px;
 			filter: invert(100%);
+		}
+	}
+
+	&--confirm {
+		background-color: $color-red-400;
+
+		&:hover {
+			background-color: $color-red-500;
 		}
 	}
 
