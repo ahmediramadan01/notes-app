@@ -6,16 +6,43 @@ import noNotesIllustration from "../../assets/icons/no-notes-illustration.svg";
 import noSearchResultsIllustration from "../../assets/icons/no-search-results-illustration.svg";
 import closeIcon from "../../assets/icons/close-icon.svg";
 
-class NotesView {
-	_data;
-	_notesContainerElement = document.querySelector(".notes");
-	_categoriesTabsElements = document.querySelectorAll(".categories__tab");
+class HomeView {
+	#data;
 
-	_clearNotesContainer() {
-		this._notesContainerElement.innerHTML = "";
+	#categoriesTabsElements = document.querySelectorAll(".categories__tab");
+	#notesContainerElement = document.querySelector(".notes");
+
+	#clearNotesContainer() {
+		this.#notesContainerElement.innerHTML = "";
 	}
 
-	_generateNotesMarkup() {
+	#generateNoNotesMarkup() {
+		return `
+    <figure class="no-notes">
+      <img
+        src="${noNotesIllustration}"
+        alt="No notes illustration"
+        width="207px"
+        height="188px" />
+      <figcaption>You don't have any notes</figcaption>
+    </figure>
+    `;
+	}
+
+	#generateNoSearchResultsMarkup() {
+		return `
+    <figure class="no-notes">
+      <img
+        src="${noSearchResultsIllustration}"
+        alt="No search results illustration"
+        width="207px"
+        height="188px" />
+      <figcaption>No notes found</figcaption>
+    </figure>
+    `;
+	}
+
+	#generateNotesMarkup() {
 		return `
     <dialog class="dialog dialog--delete" >
       <input style="display: none" type="text" id="deleteId" name="deleteId" />
@@ -36,7 +63,7 @@ class NotesView {
         <button class="button button--confirm">Delete</button>
       </div>
     </dialog>
-    ${this._data
+    ${this.#data
 			.map((note) => {
 				return `
         <article class="note ${note.completed ? "note--completed" : ""}" data-id="${note.id}">
@@ -79,59 +106,26 @@ class NotesView {
 			.join("")}`;
 	}
 
-	_renderNoNotes() {
-		const markup = `
-    <figure class="no-notes">
-      <img
-        src="${noNotesIllustration}"
-        alt="No notes illustration"
-        width="207px"
-        height="188px" />
-      <figcaption>You don't have any notes</figcaption>
-    </figure>
-    `;
-
-		this._clearNotesContainer();
-
-		this._notesContainerElement.insertAdjacentHTML("afterbegin", markup);
-	}
-
-	_renderNoSearchResults() {
-		const markup = `
-    <figure class="no-notes">
-      <img
-        src="${noSearchResultsIllustration}"
-        alt="No search results illustration"
-        width="207px"
-        height="188px" />
-      <figcaption>No notes found</figcaption>
-    </figure>
-    `;
-
-		this._clearNotesContainer();
-
-		this._notesContainerElement.insertAdjacentHTML("afterbegin", markup);
-	}
-
 	render(data, search = false) {
+		let markup;
+
 		if (!data || (Array.isArray(data) && data.length === 0)) {
-			if (search) return this._renderNoSearchResults();
-			else return this._renderNoNotes();
+			if (search) markup = this.#generateNoSearchResultsMarkup();
+			else markup = this.#generateNoNotesMarkup();
+		} else {
+			this.#data = data;
+			markup = this.#generateNotesMarkup();
 		}
 
-		this._data = data;
+		this.#clearNotesContainer();
 
-		const markup = this._generateNotesMarkup();
-
-		this._clearNotesContainer();
-
-		this._notesContainerElement.insertAdjacentHTML("afterbegin", markup);
+		this.#notesContainerElement.insertAdjacentHTML("afterbegin", markup);
 	}
 
 	addHandlerRender(handler) {
 		["load", "hashchange"].forEach((e) =>
 			window.addEventListener(e, () => {
-				this._categoriesTabsElements.forEach((element) =>
+				this.#categoriesTabsElements.forEach((element) =>
 					element.classList.remove("categories__tab--active"),
 				);
 
@@ -146,4 +140,4 @@ class NotesView {
 	}
 }
 
-export default new NotesView();
+export default new HomeView();

@@ -1,17 +1,18 @@
 import "../styles/main.scss";
 import * as model from "./model.js";
-import notesView from "./views/notesView.js";
-import noteView from "./views/noteView.js";
+import addView from "./views/addView.js";
 import searchView from "./views/searchView.js";
+import homeView from "./views/homeView.js";
+import noteView from "./views/noteView.js";
 
 const controlAddNote = function (note) {
 	model.addNote(note);
-	notesView.render(model.state.notes);
+	homeView.render(model.state.notes);
 };
 
 const controlEditNote = function (note) {
 	model.editNote(note);
-	notesView.render(model.state.notes);
+	homeView.render(model.state.notes);
 };
 
 const controlNote = function (note, add = false) {
@@ -23,20 +24,20 @@ const getHash = function () {
 	return window.location.hash.slice(1);
 };
 
-const controlNotes = function () {
+const controlRenderNotes = function () {
 	const hash = getHash();
 
-	if (!hash || hash === "all") notesView.render(model.state.notes);
+	if (!hash || hash === "all") homeView.render(model.state.notes);
 	else {
 		const filteredNotes = model.filterNotesByCategory(model.state.notes, hash);
-		notesView.render(filteredNotes);
+		homeView.render(filteredNotes);
 	}
 };
 
-const controlToggleCompleted = function (id) {
+const controlToggleCompletion = function (id) {
 	model.toggleCompletion(id);
 
-	controlNotes();
+	controlRenderNotes();
 };
 
 const controlSearch = function (input) {
@@ -44,27 +45,27 @@ const controlSearch = function (input) {
 
 	if (input !== "") {
 		const hash = getHash();
-		if (!hash || hash === "all") notesView.render(searchedNotes, true);
+		if (!hash || hash === "all") homeView.render(searchedNotes, true);
 		else {
 			const filteredSearchNotes = model.filterNotesByCategory(
 				searchedNotes,
 				hash,
 			);
-			notesView.render(filteredSearchNotes);
+			homeView.render(filteredSearchNotes);
 		}
-	} else notesView.render(model.state.notes);
+	} else homeView.render(model.state.notes);
 };
 
 const controlDeleteNote = function (id) {
 	model.deleteNote(id);
-	notesView.render(model.state.notes);
+	homeView.render(model.state.notes);
 };
 
 const init = function () {
-	noteView.addHandlerNote(controlNote);
-	noteView.addHandlerToggleCompleted(controlToggleCompleted);
-	noteView.addHandlerDeleteNote(controlDeleteNote);
-	notesView.addHandlerRender(controlNotes);
+	addView.addHandlerAddNote(controlNote);
 	searchView.addHandlerSearch(controlSearch);
+	homeView.addHandlerRender(controlRenderNotes);
+	noteView.addHandlerToggleCompletion(controlToggleCompletion);
+	noteView.addHandlerDeleteNote(controlDeleteNote);
 };
 init();
