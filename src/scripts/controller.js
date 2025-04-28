@@ -1,71 +1,45 @@
 import "../styles/main.scss";
 import * as model from "./model.js";
-import addView from "./views/addView.js";
+import addNoteView from "./views/addNoteView.js";
 import searchView from "./views/searchView.js";
 import homeView from "./views/homeView.js";
 import noteView from "./views/noteView.js";
 
-const controlAddNote = function (note) {
-	model.addNote(note);
-	homeView.render(model.state.notes);
-};
+function controlRenderNotes() {
+	const category = window.location.hash.slice(1);
+	if (model.state.search) homeView.render(model.filterNotes(category), true);
+	else homeView.render(model.filterNotes(category));
+}
 
-const controlEditNote = function (note) {
-	model.editNote(note);
-	homeView.render(model.state.notes);
-};
-
-const controlNote = function (note, add = false) {
-	if (add) controlAddNote(note);
-	else controlEditNote(note);
-};
-
-const getHash = function () {
-	return window.location.hash.slice(1);
-};
-
-const controlRenderNotes = function () {
-	const hash = getHash();
-
-	if (!hash || hash === "all") homeView.render(model.state.notes);
-	else {
-		const filteredNotes = model.filterNotesByCategory(model.state.notes, hash);
-		homeView.render(filteredNotes);
+function controlNote(note) {
+	if (!model.state.notes.some((element) => element.id === note.id)) {
+		model.addNote(note);
+	} else {
+		model.editNote(note);
 	}
-};
-
-const controlToggleCompletion = function (id) {
-	model.toggleCompletion(id);
-
 	controlRenderNotes();
-};
+}
 
-const controlSearch = function (input) {
-	const searchedNotes = model.searchNotes(model.state.notes, input);
+function controlToggleCompletion(id) {
+	model.toggleCompletion(id);
+	controlRenderNotes();
+}
 
-	if (input !== "") {
-		const hash = getHash();
-		if (!hash || hash === "all") homeView.render(searchedNotes, true);
-		else {
-			const filteredSearchNotes = model.filterNotesByCategory(
-				searchedNotes,
-				hash,
-			);
-			homeView.render(filteredSearchNotes);
-		}
-	} else homeView.render(model.state.notes);
-};
+function controlSearch(input) {
+	model.state.search = input;
+	controlRenderNotes();
+}
 
-const controlDeleteNote = function (id) {
+function controlDeleteNote(id) {
 	model.deleteNote(id);
-	homeView.render(model.state.notes);
-};
+	controlRenderNotes();
+}
 
-const init = function () {
-	addView.addHandlerAddNote(controlNote);
-	searchView.addHandlerSearch(controlSearch);
+function init() {
+	addNoteView.addHandlerAddNote(controlNote);
 	homeView.addHandlerRender(controlRenderNotes);
+	searchView.addHandlerSearch(controlSearch);
 	noteView.addHandlerToggleCompletion(controlToggleCompletion);
 	noteView.addHandlerDeleteNote(controlDeleteNote);
-};
+}
 init();

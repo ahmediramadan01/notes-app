@@ -1,52 +1,50 @@
 export const state = {
 	notes: [],
+	search: "",
 };
 
-const persistNotes = function () {
-	localStorage.setItem("notes", JSON.stringify(state.notes));
-};
-
-export const addNote = function (note) {
+export function addNote(note) {
 	state.notes.push(note);
-
 	persistNotes();
-};
+}
 
-export const editNote = function (note) {
+export function editNote(note) {
 	const noteIndex = state.notes.findIndex((n) => note.id === n.id);
 	state.notes[noteIndex] = { ...state.notes[noteIndex], ...note };
-	console.log(state.notes);
-
 	persistNotes();
-};
+}
 
-export const toggleCompletion = function (id) {
+export function toggleCompletion(id) {
 	const noteIndex = state.notes.findIndex((note) => note.id === id);
 	state.notes[noteIndex].completed = !state.notes[noteIndex].completed;
-
 	persistNotes();
-};
+}
 
-export const searchNotes = function (notes, input) {
-	return notes.filter((note) =>
-		note.title.toLowerCase().includes(input.toLowerCase()),
-	);
-};
+export function filterNotes(category) {
+	if (!category || category === "all")
+		return state.notes.filter((note) =>
+			note.title.toLowerCase().includes(state.search.toLowerCase()),
+		);
+	else
+		return state.notes
+			.filter((note) => category === note.category)
+			.filter((note) =>
+				note.title.toLowerCase().includes(state.search.toLowerCase()),
+			);
+}
 
-export const filterNotesByCategory = function (notes, hash) {
-	return notes.filter((note) => hash === note.category);
-};
-
-export const deleteNote = function (id) {
+export function deleteNote(id) {
 	const noteIndex = state.notes.findIndex((note) => note.id === id);
-	console.log(noteIndex);
 	state.notes.splice(noteIndex, 1);
-
 	persistNotes();
-};
+}
 
-const init = function () {
+function persistNotes() {
+	localStorage.setItem("notes", JSON.stringify(state.notes));
+}
+
+function getLocalNotes() {
 	if (localStorage.getItem("notes"))
 		state.notes = JSON.parse(localStorage.getItem("notes"));
-};
-init();
+}
+getLocalNotes();

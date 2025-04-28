@@ -8,36 +8,25 @@ import closeIcon from "../../assets/icons/close-icon.svg";
 
 class HomeView {
 	#data;
-
-	#categoriesTabsElements = document.querySelectorAll(".categories__tab");
 	#notesContainerElement = document.querySelector(".notes");
+	#categoriesTabsElements = document.querySelectorAll(".categories__tab");
 
 	#clearNotesContainer() {
 		this.#notesContainerElement.innerHTML = "";
 	}
 
-	#generateNoNotesMarkup() {
+	#generateErrorMarkup(search) {
+		let errorImage;
+		if (search) errorImage = noSearchResultsIllustration;
+		else errorImage = noNotesIllustration;
 		return `
     <figure class="no-notes">
       <img
-        src="${noNotesIllustration}"
+        src="${errorImage}"
         alt="No notes illustration"
         width="207px"
         height="188px" />
-      <figcaption>You don't have any notes</figcaption>
-    </figure>
-    `;
-	}
-
-	#generateNoSearchResultsMarkup() {
-		return `
-    <figure class="no-notes">
-      <img
-        src="${noSearchResultsIllustration}"
-        alt="No search results illustration"
-        width="207px"
-        height="188px" />
-      <figcaption>No notes found</figcaption>
+      <figcaption>${search ? "No notes found" : "You don't have any notes"}</figcaption>
     </figure>
     `;
 	}
@@ -110,8 +99,7 @@ class HomeView {
 		let markup;
 
 		if (!data || (Array.isArray(data) && data.length === 0)) {
-			if (search) markup = this.#generateNoSearchResultsMarkup();
-			else markup = this.#generateNoNotesMarkup();
+			markup = this.#generateErrorMarkup(search);
 		} else {
 			this.#data = data;
 			markup = this.#generateNotesMarkup();
@@ -123,15 +111,15 @@ class HomeView {
 	}
 
 	addHandlerRender(handler) {
-		["load", "hashchange"].forEach((e) =>
-			window.addEventListener(e, () => {
+		["load", "hashchange"].forEach((eventName) =>
+			window.addEventListener(eventName, () => {
 				this.#categoriesTabsElements.forEach((element) =>
 					element.classList.remove("categories__tab--active"),
 				);
 
-				const id = window.location.hash.slice(1);
+				const category = window.location.hash.slice(1);
 				document
-					.querySelector(`a[href='#${!id ? "all" : id}']`)
+					.querySelector(`a[href='#${!category ? "all" : category}']`)
 					.classList.add("categories__tab--active");
 
 				handler();
