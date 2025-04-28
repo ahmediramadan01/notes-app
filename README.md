@@ -4,8 +4,8 @@
 
 ### Features:
 
-- Allow users to manage their tasks with notes.
-- Built using OOP and MVC architecture.
+- Users can add notes, delete notes, search notes, filter notes by category, and toggle notes completion.
+- Built using MVC architecture for better structure, maintainability, and further expandability.
 
 ![Notes App Desktop's Screenshot](./notes-app-desktop-screenshot.png?raw=true "Notes App Desktop's Screenshot")
 
