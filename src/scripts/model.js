@@ -1,6 +1,7 @@
 export const state = {
 	notes: [],
 	search: "",
+	showCompleted: false,
 };
 
 export function addNote(note) {
@@ -21,12 +22,17 @@ export function toggleCompletion(id) {
 }
 
 export function filterNotes(category) {
+	let filteredNotes = [...state.notes];
+	if (state.showCompleted) {
+		filteredNotes = state.notes.filter((note) => note.completed);
+	}
+
 	if (!category || category === "all")
-		return state.notes.filter((note) =>
+		return filteredNotes.filter((note) =>
 			note.title.toLowerCase().includes(state.search.toLowerCase()),
 		);
 	else
-		return state.notes
+		return filteredNotes
 			.filter((note) => category === note.category)
 			.filter((note) =>
 				note.title.toLowerCase().includes(state.search.toLowerCase()),

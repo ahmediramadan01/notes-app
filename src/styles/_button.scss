@@ -73,20 +73,8 @@
 		}
 	}
 
-	&--checkbox {
-		& img {
-			width: 18px;
-			height: 18px;
-		}
-	}
-
-	&--edit {
-		& img {
-			width: 18px;
-			height: 18px;
-		}
-	}
-
+	&--checkbox,
+	&--edit,
 	&--delete {
 		& img {
 			width: 18px;

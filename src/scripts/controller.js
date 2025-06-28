@@ -4,6 +4,7 @@ import addNoteView from "./views/addNoteView.js";
 import searchView from "./views/searchView.js";
 import homeView from "./views/homeView.js";
 import noteView from "./views/noteView.js";
+import showCompletedView from "./views/showCompletedView.js";
 
 function controlRenderNotes() {
 	const category = window.location.hash.slice(1);
@@ -35,11 +36,17 @@ function controlDeleteNote(id) {
 	controlRenderNotes();
 }
 
+function controlShowCompleted() {
+	model.state.showCompleted = !model.state.showCompleted;
+	controlRenderNotes();
+}
+
 function init() {
 	addNoteView.addHandlerAddNote(controlNote);
 	homeView.addHandlerRender(controlRenderNotes);
 	searchView.addHandlerSearch(controlSearch);
 	noteView.addHandlerToggleCompletion(controlToggleCompletion);
 	noteView.addHandlerDeleteNote(controlDeleteNote);
+	showCompletedView.addHandlerShow(controlShowCompleted);
 }
 init();

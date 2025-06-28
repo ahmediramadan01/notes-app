@@ -96,31 +96,41 @@
 		<main class="main">
 			<div class="container">
 				<h1 class="main-heading">Your notes</h1>
-				<nav class="nav">
-					<ul class="categories">
-						<li class="categories__item">
-							<a
-								href="#all"
-								class="categories__tab categories__tab--active"
-								role="tab">
-								All
-							</a>
-						</li>
-						<li class="categories__item">
-							<a href="#personal" class="categories__tab" role="tab">
-								Personal
-							</a>
-						</li>
-						<li class="categories__item">
-							<a href="#home" class="categories__tab" role="tab">Home</a>
-						</li>
-						<li class="categories__item">
-							<a href="#business" class="categories__tab" role="tab">
-								Business
-							</a>
-						</li>
-					</ul>
-				</nav>
+				<header class="categories-header">
+					<nav class="nav">
+						<ul class="categories">
+							<li class="categories__item">
+								<a
+									href="#all"
+									class="categories__tab categories__tab--active"
+									role="tab">
+									All
+								</a>
+							</li>
+							<li class="categories__item">
+								<a href="#personal" class="categories__tab" role="tab">
+									Personal
+								</a>
+							</li>
+							<li class="categories__item">
+								<a href="#home" class="categories__tab" role="tab">Home</a>
+							</li>
+							<li class="categories__item">
+								<a href="#business" class="categories__tab" role="tab">
+									Business
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<div class="completed-container">
+						<button
+							class="button button--icon button--checkbox button--show-completed"
+							role="checkbox">
+							<img src="./assets/icons/checkbox-icon.svg" alt="Checkbox icon" />
+						</button>
+						<span>Show only completed notes</span>
+					</div>
+				</header>
 				<section class="notes">
 					<figure class="no-notes">
 						<img

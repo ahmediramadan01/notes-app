@@ -6,6 +6,12 @@
 	padding: 0 10px;
 }
 
+.categories-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .categories {
 	list-style: none;
 	display: flex;
@@ -45,6 +51,12 @@
 			}
 		}
 	}
+}
+
+.completed-container {
+	display: flex;
+	align-items: center;
+	gap: 9px;
 }
 
 .notes {
